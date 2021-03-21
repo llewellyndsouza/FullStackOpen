@@ -1,5 +1,5 @@
 import React from "react";
-import Course from "./components/Course";
+import Courses from "./components/Courses";
 
 const App = () => {
   const courses = [
@@ -48,10 +48,9 @@ const App = () => {
   ];
 
   return (
-    <div>
-      <Course course={courses[0]} />
-      <Course course={courses[1]} />
-    </div>
+    <>
+      <Courses courses={courses} />
+    </>
   );
 };
 
