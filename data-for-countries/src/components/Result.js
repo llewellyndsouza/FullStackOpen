@@ -1,9 +1,9 @@
 const Result = ({ countries, search }) => {
   if (search === "") {
-    return <p>Enter a name to begin</p>;
+    return <p>Enter a name to begin - case insensitive</p>;
   } else {
     const filterList = countries.filter((country) =>
-      country.name.includes(search)
+      country.name.toLowerCase().includes(search.toLowerCase())
     );
     console.log(filterList);
 
