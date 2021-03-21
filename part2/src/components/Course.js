@@ -1,6 +1,6 @@
 import React from "react";
 
-const Header = ({course}) => {
+const Header = ({ course }) => {
   return (
     <>
       <h1>{course.name}</h1>
@@ -8,15 +8,22 @@ const Header = ({course}) => {
   );
 };
 
-const Part = ({course}) => {
-  return(course.parts.map(part=>(
-    <p>{part.name} : {part.exercises}</p>
-  )))
+const Part = ({ course }) => {
+  return course.parts.map((part) => (
+    <p>
+      {part.name} : {part.exercises}
+    </p>
+  ));
 };
 
-const Total = ({course}) => (
+const Total = ({ course }) => (
   <>
-    <p>Total of {course.parts.reduce((pre, cur) => pre + cur.exercises, 0)} exercises</p>
+    <p>
+      <strong>
+        Total of {course.parts.reduce((pre, cur) => pre + cur.exercises, 0)}{" "}
+        exercises
+      </strong>
+    </p>
   </>
 );
 
