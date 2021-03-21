@@ -1,5 +1,15 @@
+import numbersService from "../services/numbers";
+
 const PersonForm = (props) => {
-  const [persons, setPersons, newName, setNewName, newNumber, setNewNumber] = props.tools;
+  const [
+    persons,
+    setPersons,
+    newName,
+    setNewName,
+    newNumber,
+    setNewNumber,
+  ] = props.tools;
+
   const addNew = (e) => {
     e.preventDefault();
 
@@ -11,7 +21,9 @@ const PersonForm = (props) => {
     if (persons.find(({ name }) => name === newName)) {
       alert(`${newName} is already added to phonebook`);
     } else {
-      setPersons(persons.concat(newContact));
+      numbersService
+        .addNew(newContact)
+        .then((contact) => setPersons(persons.concat(contact)));
     }
 
     setNewName("");

@@ -8,7 +8,7 @@ const Persons = ({ persons, filter }) => {
     ));
   } else {
     people = persons.filter(({ name, number }) => {
-      if (name.includes(filter)) return true;
+      if (name.toLowerCase().includes(filter.toLowerCase())) return true;
       else return false;
     });
     people = people.map((person) => (
