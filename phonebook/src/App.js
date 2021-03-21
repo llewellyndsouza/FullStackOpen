@@ -7,7 +7,11 @@ const App = () => {
   const addNew = (e) => {
     e.preventDefault();
     
-    setPersons(persons.concat({name: newName}))
+    if(persons.find(({name})=> name === newName)) {
+      alert(`${newName} already exists`)
+    } else {
+      setPersons(persons.concat({name: newName}))
+    }
     
     setNewName("");
   };
