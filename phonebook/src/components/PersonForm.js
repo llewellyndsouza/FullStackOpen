@@ -18,8 +18,24 @@ const PersonForm = (props) => {
       number: newNumber,
     };
 
-    if (persons.find(({ name }) => name === newName)) {
-      alert(`${newName} is already added to phonebook`);
+    let duplicate = "";
+    duplicate = persons.find(({ name }) => name === newName);
+    console.log(duplicate);
+
+    if (duplicate) {
+      if (
+        window.confirm(
+          `The name ${newName} already exists. WOuld you like to replace the old number with a new one?`
+        )
+      ) {
+        numbersService
+          .updateNumber(duplicate.id, newContact)
+          .then((updatedContact) => {
+            setPersons(
+              persons.map((p) => (p.id !== duplicate.id ? p : updatedContact))
+            );
+          });
+      }
     } else {
       numbersService
         .addNew(newContact)
