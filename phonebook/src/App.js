@@ -3,6 +3,8 @@ import Filter from "./components/Filter";
 import PersonForm from "./components/PersonForm";
 import Persons from "./components/Persons";
 
+import Notification from './components/Notification'
+
 import numbersService from './services/numbers';
 
 const App = () => {
@@ -11,6 +13,8 @@ const App = () => {
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
   const [newFilter, setNewFilter] = useState("");
+
+  const [notification, setNotification] = useState({message:null, type:null})
 
   const hook = () => {
     numbersService.getAll().then(contacts => {
@@ -24,6 +28,7 @@ const App = () => {
   return (
     <div>
       <h1>Phonebook</h1>
+      <Notification notification={notification}/>
       <Filter newFilter={newFilter} setNewFilter={setNewFilter} />
       <h2>Add a new</h2>
       <PersonForm
@@ -34,6 +39,7 @@ const App = () => {
           setNewName,
           newNumber,
           setNewNumber,
+          setNotification
         ]}
       />
       <h2>Numbers</h2>

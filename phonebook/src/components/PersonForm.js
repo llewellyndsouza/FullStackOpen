@@ -8,6 +8,7 @@ const PersonForm = (props) => {
     setNewName,
     newNumber,
     setNewNumber,
+    setNotification
   ] = props.tools;
 
   const addNew = (e) => {
@@ -34,12 +35,22 @@ const PersonForm = (props) => {
             setPersons(
               persons.map((p) => (p.id !== duplicate.id ? p : updatedContact))
             );
+            setNotification({message:`Added ${newName}`, type:"info"});
+            setTimeout(() => {
+              setNotification({message:null, type:null})
+            }, 5000);
           });
       }
     } else {
       numbersService
         .addNew(newContact)
-        .then((contact) => setPersons(persons.concat(contact)));
+        .then((contact) => {
+          setPersons(persons.concat(contact))
+          setNotification({message:`Added ${newName}`, type:"success"});
+          setTimeout(() => {
+            setNotification({message:null, type:null})
+          }, 5000);
+        });
     }
 
     setNewName("");
