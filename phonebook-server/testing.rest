@@ -12,3 +12,12 @@ DELETE http://localhost:3001/api/persons/1
 
 ### Delete invalid person
 DELETE http://localhost:3001/api/persons/1000
+
+### New person
+POST http://localhost:3001/api/persons
+content-type: application/json
+
+{
+    "name": "sample4",
+    "number": "123 456 7896"
+}
