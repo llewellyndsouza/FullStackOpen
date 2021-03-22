@@ -39,6 +39,11 @@ const PersonForm = (props) => {
             setTimeout(() => {
               setNotification({message:null, type:null})
             }, 5000);
+          }).catch(err=>{
+            setNotification({message:`${newName} has already been removed from server`, type:"error"});
+            setTimeout(() => {
+              setNotification({message:null, type:null})
+            }, 5000);            
           });
       }
     } else {

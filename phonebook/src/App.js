@@ -43,7 +43,7 @@ const App = () => {
         ]}
       />
       <h2>Numbers</h2>
-      <Persons persons={persons} setPersons={setPersons} filter={newFilter} />
+      <Persons persons={persons} setPersons={setPersons} filter={newFilter} setNotification={setNotification} />
     </div>
   );
 };

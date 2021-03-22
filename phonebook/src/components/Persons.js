@@ -1,38 +1,43 @@
 import numbersService from "../services/numbers";
 
-// const DeleteButton = ({id, persons, setPersons}) => {
-//   return(
-//     <button
-//           onClick={() => {
-//             if (window.confirm(`are you sure?`)) {
-//               numbersService.deleteNumber(id);
-//               setPersons(persons.map(person => person.id !== id))
-//             }
-//           }}
-//         >
-//           delete
-//         </button>
-//   )
-// }
+const DeleteButton = ({ id, persons, setPersons, setNotification }) => {
+  return (
+    <button
+      onClick={() => {
+        if (window.confirm(`are you sure?`)) {
+          numbersService
+            .deleteNumber(id)
+            .then((success) => {
+              console.log(success);
+              setPersons(persons.filter((p) => p.id !== id));
+            })
+            .catch((err) => {
+              setNotification({ message: `${persons.find(p => p.id === id).name} already deleted on server`, type: "error" });
+              setPersons(persons.filter((p) => p.id !== id));
+              setTimeout(() => {
+                setNotification({ message: null, type: null });
+              }, 5000);
+            });
+        }
+      }}
+    >
+      delete
+    </button>
+  );
+};
 
-const Persons = ({ persons, setPersons, filter }) => {
+const Persons = ({ persons, setPersons, filter, setNotification }) => {
   let people = "";
   if (filter === "") {
     people = persons.map((person) => (
       <p key={person.name}>
         {person.name} : {person.number}{" "}
-        <button
-          onClick={() => {
-            if (window.confirm(`are you sure?`)) {
-              numbersService.deleteNumber(person.id).then(err => {
-                console.log(err)
-                setPersons(persons.filter(p => p.id !== person.id))
-                })
-            }
-          }}
-        >
-          delete
-        </button>
+        <DeleteButton
+          id={person.id}
+          persons={persons}
+          setPersons={setPersons}
+          setNotification={setNotification}
+        />
       </p>
     ));
   } else {
@@ -43,18 +48,12 @@ const Persons = ({ persons, setPersons, filter }) => {
     people = people.map((person) => (
       <p key={person.name}>
         {person.name} : {person.number}{" "}
-        <button
-          onClick={() => {
-            if (window.confirm(`are you sure?`)) {
-              numbersService.deleteNumber(person.id).then(err => {
-                console.log(err)
-                setPersons(persons.filter(p => p.id !== person.id))
-                })
-            }
-          }}
-        >
-          delete
-        </button>
+        <DeleteButton
+          id={person.id}
+          persons={persons}
+          setPersons={setPersons}
+          setNotification={setNotification}
+        />
       </p>
     ));
   }
