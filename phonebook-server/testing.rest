@@ -1,0 +1,14 @@
+### Get all
+GET http://localhost:3001/api/persons
+
+### Get Valid person
+GET http://localhost:3001/api/persons/1
+
+### get Invalid person
+GET http://localhost:3001/api/persons/1000
+
+### Delete valid person
+DELETE http://localhost:3001/api/persons/1
+
+### Delete invalid person
+DELETE http://localhost:3001/api/persons/1000

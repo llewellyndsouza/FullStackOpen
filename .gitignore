@@ -1,3 +1,4 @@
 data-for-countries/.env
 backend/node_modules/*
 backend/get_all_notes.rest
+phonebook-server/node_modules/*
